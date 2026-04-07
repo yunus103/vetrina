@@ -37,7 +37,7 @@ export function ClientsMarquee({ data }: TestimonialsProps) {
   };
 
   return (
-    <section className="py-16 md:py-32 bg-backgroundLight border-y border-gray-200">
+    <section className="py-16 md:py-32 bg-backgroundLight border-y border-gray-200 overflow-hidden">
       <div className="px-6 md:px-24 mb-12">
         <h2 className="font-display text-4xl uppercase tracking-widest">{data.baslik}</h2>
       </div>

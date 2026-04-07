@@ -45,13 +45,13 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
     }
   }, [menuOpen]);
 
-  const navBaseClass = "fixed top-0 left-0 w-full z-50 px-6 md:px-8 flex justify-between items-center transition-all duration-500 ease-in-out";
+  const navBaseClass = "fixed top-0 left-0 w-full z-50 px-6 md:px-8 flex justify-between items-center transition-[background-color,padding,box-shadow,backdrop-filter] duration-500 ease-in-out";
   
   const isTransparent = pathname === "/" && !isScrolled;
 
   const scrolledClass = isTransparent 
     ? "bg-transparent py-4 md:py-6" 
-    : "bg-white/95 backdrop-blur-md py-3 md:py-4 shadow-sm";
+    : "bg-white/95 backdrop-blur-md py-4 md:py-4 shadow-sm";
 
   const textClass = isTransparent
     ? "text-white"

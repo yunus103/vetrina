@@ -120,8 +120,14 @@ html {
   * {
     @apply border-border outline-ring/50;
   }
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
   body {
-    @apply font-body bg-backgroundLight text-primary overflow-x-hidden;
+    @apply font-body bg-backgroundLight text-primary;
   }
   html {
     @apply font-sans;

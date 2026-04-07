@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
     <article className="min-h-screen bg-backgroundLight pb-24">
       <div className="pt-32 pb-16 px-6 md:px-12 text-center max-w-7xl mx-auto">
         <FadeIn direction="up">
-          <h1 className="text-4xl md:text-7xl font-display uppercase tracking-wider">Projelerimiz</h1>
+          <h1 className="text-4xl md:text-7xl font-display uppercase tracking-wider">Tasarımlarımız</h1>
         </FadeIn>
       </div>
 
