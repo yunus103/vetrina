@@ -1,36 +1,27 @@
-import Link from "next/link";
-import {
-  FaInstagram,
-  FaFacebook,
-  FaLinkedin,
-  FaYoutube,
-  FaTiktok,
-  FaPinterest,
-  FaWhatsapp,
-} from "react-icons/fa";
+import Link from 'next/link';
+import React from 'react';
+import { SanityImage } from '@/components/ui/SanityImage';
+import { FaInstagram, FaFacebookF, FaLinkedinIn, FaLink } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
-import { RiMailLine, RiPhoneLine, RiMapPinLine } from "react-icons/ri";
 
-type NavItem = {
+interface NavItem {
   label: string;
   href: string;
   openInNewTab?: boolean;
-};
+}
 
-type SocialLink = {
+interface SocialLink {
   platform: string;
   url: string;
-};
+}
 
-const socialIconMap: Record<string, React.ElementType> = {
-  instagram: FaInstagram,
-  facebook: FaFacebook,
-  twitter: FaXTwitter,
-  linkedin: FaLinkedin,
-  youtube: FaYoutube,
-  tiktok: FaTiktok,
-  pinterest: FaPinterest,
-  whatsapp: FaWhatsapp,
+const getSocialIcon = (platform: string) => {
+  const p = platform.toLowerCase();
+  if (p.includes('instagram')) return <FaInstagram />;
+  if (p.includes('twitter') || p.includes('x')) return <FaXTwitter />;
+  if (p.includes('linkedin')) return <FaLinkedinIn />;
+  if (p.includes('facebook')) return <FaFacebookF />;
+  return <FaLink />;
 };
 
 function resolveHref(item: NavItem): string {
@@ -38,109 +29,88 @@ function resolveHref(item: NavItem): string {
 }
 
 export function Footer({ settings, navigation }: { settings: any; navigation: any }) {
+  const socialLinks: SocialLink[] = settings?.socialLinks || [];
   const footerLinks: NavItem[] = navigation?.footerLinks || [];
-  const socialLinks: SocialLink[] = (settings?.socialLinks || []).filter((s: SocialLink) => s.url);
-  const contact = settings?.contactInfo;
+  
+  const instagramLink = socialLinks.find(s => s.platform.toLowerCase().includes('instagram'))?.url;
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-background">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-
-          {/* Marka & İletişim */}
-          <div className="space-y-4">
-            <h3 className="font-bold text-lg">{settings?.siteName}</h3>
-            {settings?.siteTagline && (
-              <p className="text-sm text-muted-foreground">{settings.siteTagline}</p>
-            )}
-            <div className="space-y-2">
-              {contact?.phone && (
-                <a
-                  href={`tel:${contact.phone}`}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <RiPhoneLine className="shrink-0" />
-                  {contact.phone}
-                </a>
-              )}
-              {contact?.email && (
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <RiMailLine className="shrink-0" />
-                  {contact.email}
-                </a>
-              )}
-              {contact?.address && (
-                <p className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <RiMapPinLine className="shrink-0 mt-0.5" />
-                  {contact.address}
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* Footer Linkleri */}
-          {footerLinks.length > 0 && (
-            <div className="space-y-4">
-              <h3 className="font-bold text-sm uppercase tracking-wider">Hızlı Linkler</h3>
-              <nav className="space-y-2">
-                {footerLinks.map((item, i) => (
-                  <Link
-                    key={i}
-                    href={resolveHref(item)}
-                    target={item.openInNewTab ? "_blank" : undefined}
-                    rel={item.openInNewTab ? "noopener noreferrer" : undefined}
-                    className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+    <footer className="bg-primary text-white py-12 md:py-16 px-6 md:px-12 border-t border-white/10">
+      <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-12">
+        
+        {/* Brand & Description */}
+        <div className="flex flex-col items-center md:items-start gap-6 text-center md:text-left w-full md:basis-1/3">
+          {(settings?.footerLogo || settings?.logo) ? (
+             <div className="relative w-48 h-20 md:w-60 md:h-24 flex items-center justify-center md:justify-start">
+               <SanityImage 
+                 image={settings.footerLogo || settings.logo}
+                 fill={true}
+                 sizes="(max-width: 768px) 192px, 240px"
+                 className="object-contain object-center md:object-left"
+               />
+             </div>
+          ) : (
+             <span className="text-3xl font-display tracking-tighter block text-white font-extrabold">{settings?.siteName || 'Vetrina'}</span>
           )}
-
-          {/* Sosyal Medya */}
-          {socialLinks.length > 0 && (
-            <div className="space-y-4">
-              <h3 className="font-bold text-sm uppercase tracking-wider">Sosyal Medya</h3>
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map((social, i) => {
-                  const Icon = socialIconMap[social.platform];
-                  if (!Icon) return null;
-                  return (
-                    <a
-                      key={i}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.platform}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-                    >
-                      <Icon size={16} />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
+          
+          {settings?.siteTagline && (
+            <p className="text-xs text-white/80 max-w-xs md:max-w-sm leading-relaxed mx-auto md:mx-0">
+              {settings.siteTagline}
+            </p>
           )}
         </div>
 
-        {/* Alt Bar */}
-        <div className="mt-12 border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            © {currentYear} {settings?.siteName}. Tüm hakları saklıdır.
-          </p>
-          <div className="flex gap-4">
-            <Link href="/yasal/gizlilik-politikasi" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-              Gizlilik Politikası
-            </Link>
-            <Link href="/yasal/kullanim-kosullari" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-              Kullanım Koşulları
-            </Link>
+        {/* Middle Section: Follow Us */}
+        <div className="flex flex-col items-center md:items-start gap-4 w-full md:basis-1/3">
+          <h4 className="text-[10px] tracking-[0.3em] uppercase font-bold text-white/50">Bizi takip edin</h4>
+          <div className="flex flex-col items-center md:items-start gap-3 w-full">
+            {socialLinks.map((item, index) => (
+              <a 
+                key={index} 
+                href={item.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-4 group transition-all w-fit"
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-all shrink-0">
+                  <span className="text-white/60 group-hover:text-white text-xl md:text-2xl transition-colors">
+                    {getSocialIcon(item.platform)}
+                  </span>
+                </div>
+                <span className="text-sm font-medium tracking-wide text-white/70 group-hover:text-white transition-colors">
+                  {item.platform.charAt(0).toUpperCase() + item.platform.slice(1)}
+                </span>
+              </a>
+            ))}
           </div>
+        </div>
+
+        {/* Links */}
+        <div className="flex flex-col items-center md:items-end gap-6 w-full md:basis-1/3">
+          <h4 className="text-[10px] tracking-[0.3em] uppercase font-bold text-white/50">Hızlı Menü</h4>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-[10px] tracking-[0.2em] uppercase text-white/70 font-medium text-center md:text-right min-w-max">
+             {footerLinks.map((item, i) => (
+                <Link
+                   key={i}
+                   href={resolveHref(item)}
+                   target={item.openInNewTab ? "_blank" : undefined}
+                   rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                   className="hover:text-brandRed transition-colors whitespace-nowrap"
+                >
+                   {item.label}
+                </Link>
+             ))}
+          </div>
+        </div>
+
+      </div>
+
+      <div className="mt-12 md:mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-[10px] text-white/40 uppercase tracking-widest text-center md:text-left">
+        <p>© {currentYear} {settings?.siteName}. Tüm hakları saklıdır.</p>
+        <div className="flex gap-6">
+           <Link href="/yasal/gizlilik-politikasi" className="hover:text-white transition-colors">Gizlilik Politikası</Link>
+           <Link href="/yasal/kullanim-kosullari" className="hover:text-white transition-colors">Kullanım Koşulları</Link>
         </div>
       </div>
     </footer>

@@ -6,6 +6,7 @@ export const layoutQuery = groq`{
   "settings": *[_type == "siteSettings"][0] {
     siteName, siteTagline,
     logo { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    footerLogo { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     logoHeight,
     favicon { asset->{ _id, url } },
     contactInfo { phone, email, address, whatsappNumber, mapIframe },
@@ -21,24 +22,42 @@ export const layoutQuery = groq`{
 // ─── Sayfalar ──────────────────────────────────────────────────────────────────
 
 export const homePageQuery = groq`*[_type == "homePage"][0] {
-  heroTitle, heroSubtitle, heroCtaLabel,
-  heroCtaLink {
-    linkType,
-    manual,
-    internal->{ _type, "slug": slug.current }
-  },
-  heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  hero { slider[] { baslik, altBaslik, etiket, aciklama,
+    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+  hakkimizda { etiket, baslik, altBaslik, icerik,
+    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
+  hizmetlerimiz { baslik,
+    liste[] { baslik, aciklama,
+      gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+  surec { baslik, altBaslik,
+    adimlar[] { numara, baslik, ikon, aciklama,
+      gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+  projelerSection { etiket, baslik,
+    liste[]->{ title, "slug": slug.current, category,
+      mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+  referanslar { baslik,
+    liste[] { ad,
+      logo { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+  iletisimSection { baslik, etiket,
+    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
   seo
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0] {
-  pageTitle, pageSubtitle, body,
+  pageTitle, pageSubtitle,
   mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  body[] {
+    ...,
+    _type == "image" => { asset->{ _id, url, metadata { lqip, dimensions } }, alt, alignment, size, hotspot, crop }
+  },
+  stats[] { deger, etiket },
   seo
 }`;
 
 export const contactPageQuery = groq`*[_type == "contactPage"][0] {
-  pageTitle, pageSubtitle, formTitle, successMessage, seo
+  pageTitle, pageSubtitle, formTitle, successMessage,
+  heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  seo
 }`;
 
 // ─── Blog ──────────────────────────────────────────────────────────────────────
@@ -81,13 +100,14 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
 // ─── Projeler ──────────────────────────────────────────────────────────────────
 
 export const projectListQuery = groq`*[_type == "project"] | order(_createdAt asc) {
-  title, slug,
+  title, "slug": slug.current, category,
   mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop }
 }`;
 
 export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0] {
-  title, slug,
+  title, "slug": slug.current, category,
   mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  gallery[] { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
   body[] {
     ...,
     _type == "image" => { asset->{ _id, url, metadata { lqip, dimensions } }, alt, alignment, size, hotspot, crop }

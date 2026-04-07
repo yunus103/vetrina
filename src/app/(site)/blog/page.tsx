@@ -21,49 +21,79 @@ export default async function BlogListPage() {
   const posts = await client.fetch(blogListQuery, {}, { next: { tags: ["blog"] } });
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <FadeIn direction="up">
-        <h1 className="text-4xl font-bold mb-4">Blog</h1>
-        <p className="text-muted-foreground mb-12">Yazılar, güncellemeler ve haberler.</p>
-      </FadeIn>
-
-      {posts?.length > 0 ? (
-        <AnimateGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post: any) => (
-            <Link key={post.slug?.current} href={`/blog/${post.slug?.current}`} className="group block">
-              <article className="border rounded-lg overflow-hidden bg-card hover:shadow-lg transition-shadow duration-300">
-                {post.mainImage && (
-                  <div className="relative h-48 overflow-hidden">
-                    <SanityImage
-                      image={post.mainImage}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                )}
-                <div className="p-5">
-                  {post.publishedAt && (
-                    <time className="text-xs text-muted-foreground mb-2 block">
-                      {formatDate(post.publishedAt)}
-                    </time>
-                  )}
-                  <h2 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </h2>
-                  {post.excerpt && (
-                    <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                  )}
-                </div>
-              </article>
-            </Link>
-          ))}
-        </AnimateGroup>
-      ) : (
-        <FadeIn>
-          <p className="text-muted-foreground text-center py-16">Henüz blog yazısı yok.</p>
+    <div className="min-h-screen bg-backgroundLight pb-24">
+      {/* Header Area */}
+      <div className="pt-32 pb-16 px-6 md:px-12 text-center max-w-7xl mx-auto">
+        <FadeIn direction="up">
+          <h1 className="text-4xl md:text-7xl font-display uppercase tracking-wider mb-4">Blog</h1>
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] opacity-50 px-4">
+            Projelerimiz hakkında haberler, sektörel fikirler ve duyurular
+          </p>
         </FadeIn>
-      )}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-24">
+        {posts?.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-x-10 md:gap-y-20">
+            {posts.map((post: any, index: number) => (
+              <FadeIn key={post.slug?.current || index} delay={index * 0.05 + 0.1}>
+                <Link href={`/blog/${post.slug?.current}`} className="group block">
+                  <article className="space-y-6">
+                    {/* Image Container */}
+                    <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 rounded-sm">
+                      {post.mainImage && (
+                        <SanityImage
+                          image={post.mainImage}
+                          width={800}
+                          height={500}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 blur-0"
+                        />
+                      )}
+                      {/* Subtitle Overlay or Date Overlay if premium */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <span className="w-8 h-[1px] bg-brandRed"></span>
+                        {post.publishedAt && (
+                          <time className="text-[10px] uppercase tracking-[0.2em] text-primary/60 font-medium">
+                            {formatDate(post.publishedAt)}
+                          </time>
+                        )}
+                      </div>
+
+                      <h2 className="font-display text-2xl md:text-3xl leading-snug group-hover:text-brandRed transition-colors duration-300">
+                        {post.title}
+                      </h2>
+
+                      {post.excerpt && (
+                        <p className="text-sm text-primary/70 leading-relaxed line-clamp-2 font-medium">
+                          {post.excerpt}
+                        </p>
+                      )}
+
+                      <div className="pt-2 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-primary group-hover:translate-x-2 transition-transform duration-300">
+                        Devamını Oku
+                        <span className="material-symbols-outlined text-sm">east</span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        ) : (
+          <FadeIn>
+            <div className="flex flex-col items-center justify-center py-32 border border-dashed border-gray-200 rounded-lg">
+                <span className="material-symbols-outlined text-5xl opacity-20 mb-4">edit_note</span>
+                <p className="text-primary/40 uppercase tracking-[0.2em] text-xs">Henüz yayınlanmış bir yazı bulunmuyor.</p>
+            </div>
+          </FadeIn>
+        )}
+      </div>
     </div>
   );
 }

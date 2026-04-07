@@ -15,6 +15,13 @@ export const contactPageType = defineType({
       rows: 2,
       initialValue: "Mesajınız alındı. En kısa sürede size dönüş yapacağız.",
     }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Görseli (Sol Panel)",
+      type: "image",
+      options: { hotspot: true },
+      fields: [defineField({ name: "alt", title: "Alt Metni", type: "string" })],
+    }),
     defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
 });

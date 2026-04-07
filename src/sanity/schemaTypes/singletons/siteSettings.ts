@@ -22,6 +22,20 @@ export const siteSettingsType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "footerLogo",
+      title: "Footer Logo",
+      type: "image",
+      options: { hotspot: true },
+      description: "Footer için özel logo. Boş bırakılırsa ana logo kullanılır.",
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alternatif Metin",
+          type: "string",
+        }),
+      ],
+    }),
     defineField({ name: "favicon", title: "Favicon", type: "image", description: "512x512px kare görsel önerilir." }),
     defineField({ name: "defaultOgImage", title: "Varsayılan OG Görseli", type: "image", description: "Sosyal medya paylaşımları için. 1200x630px." }),
     defineField({

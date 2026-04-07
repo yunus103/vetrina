@@ -7,6 +7,7 @@ export const projectType = defineType({
   fields: [
     defineField({ name: "title", title: "Başlık", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (Rule) => Rule.required() }),
+    defineField({ name: "category", title: "Kategori", type: "string" }),
     defineField({
       name: "mainImage",
       title: "Ana Görsel",
@@ -14,6 +15,18 @@ export const projectType = defineType({
       options: { hotspot: true },
       fields: [defineField({ name: "alt", title: "Alt Metni", type: "string", validation: (Rule) => Rule.required() })],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "gallery",
+      title: "Galeri (Lightbox)",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [{ name: "alt", title: "Alt Metni", type: "string" }]
+        }
+      ]
     }),
     defineField({
       name: "body",
