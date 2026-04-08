@@ -16,6 +16,7 @@ type SanityImageProps = {
   priority?: boolean;
   fit?: "crop" | "fill" | "fillmax" | "max" | "scale" | "min";
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+  quality?: number;
 };
 
 export function SanityImage({
@@ -28,11 +29,16 @@ export function SanityImage({
   priority = false,
   fit = "crop",
   objectFit,
+  quality,
 }: SanityImageProps) {
   if (!image?.asset) return null;
 
   // 1. Sanity URL Builder hazırlığı
   let builder = urlForImage(image)?.auto("format");
+
+  if (quality) {
+    builder = builder?.quality(quality);
+  }
 
   // Eğer fill değilse, CDN tarafında görseli tam istediğimiz boyuta çekiyoruz
   if (!fill && builder) {

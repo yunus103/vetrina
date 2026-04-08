@@ -155,11 +155,12 @@ export function LightboxGallery({ images }: LightboxGalleryProps) {
                 >
                     <SanityImage
                         image={images[selectedImage]}
-                        width={1920}
-                        height={1080}
+                        fill
                         fit="max"
+                        quality={90}
                         sizes="100vw"
-                        className="max-w-full max-h-full object-contain pointer-events-none select-none"
+                        className="pointer-events-none select-none"
+                        objectFit="contain"
                     />
                 </motion.div>
             </div>
