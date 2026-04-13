@@ -29,6 +29,7 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       S.documentTypeListItem("blogPost").title("📝 Blog Yazıları"),
+      S.documentTypeListItem("blogCategory").title("📂 Blog Kategorileri"),
       S.documentTypeListItem("service").title("🛠 Hizmetler"),
       S.documentTypeListItem("project").title("💼 Projeler"),
       S.documentTypeListItem("legalPage").title("⚖️ Yasal Sayfalar"),

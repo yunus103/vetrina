@@ -107,8 +107,9 @@ export function Footer({ settings, navigation }: { settings: any; navigation: an
       <div className="mt-12 md:mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-[10px] text-white/40 uppercase tracking-widest text-center md:text-left">
         <p>© {currentYear} {settings?.siteName}. Tüm hakları saklıdır.</p>
         <div className="flex gap-6">
-           <Link href="/yasal/gizlilik-politikasi" className="hover:text-white transition-colors">Gizlilik Politikası</Link>
-           <Link href="/yasal/kullanim-kosullari" className="hover:text-white transition-colors">Kullanım Koşulları</Link>
+           <span>
+             <a href="https://sedminadijital.com/tr" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-bold">SEDMINA DİJİTAL</a> Tarafından Tasarlanmış ve Geliştirilmiştir.
+           </span>
         </div>
       </div>
     </footer>

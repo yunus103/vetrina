@@ -25,6 +25,21 @@ export const blogPostType = defineType({
       validation: (Rule) => Rule.max(200),
     }),
     defineField({
+      name: "category",
+      title: "Kategori",
+      type: "reference",
+      to: [{ type: "blogCategory" }],
+      description: "SEO ve sınıflandırma amaçlı kategori.",
+    }),
+    defineField({
+      name: "tags",
+      title: "Etiketler (SEO)",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      description: "SEO amaçlı etiketler. Enter tuşu ile birden fazla ekleyebilirsiniz.",
+    }),
+    defineField({
       name: "body",
       title: "İçerik",
       type: "array",

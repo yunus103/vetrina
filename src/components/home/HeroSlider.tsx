@@ -91,7 +91,7 @@ export function HeroSlider({ data }: HeroProps) {
              {current.aciklama || "27 yıllık tecrübemizle hayalinizdeki çalışma alanlarını gerçeğe dönüştürüyoruz."}
           </p>
         </div>
-        <div className="flex gap-4 self-end md:self-auto">
+        <div className="flex gap-4 self-start md:self-auto">
           <button 
             onClick={prevSlide}
             aria-label="Önceki Slayt"

@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.excerpt,
     canonicalPath: `/blog/${slug}`,
     pageSeo: post.seo,
+    keywords: post.tags,
   });
 }
 
@@ -46,28 +47,34 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <JsonLd data={articleJsonLd(post)} />
 
-      <article className="container mx-auto px-4 py-16 max-w-3xl break-words overflow-x-hidden">
+      <article className="container mx-auto px-4 pt-32 pb-16 max-w-3xl break-words overflow-x-hidden">
         <FadeIn direction="up">
-          <Button variant="ghost" className="mb-8 -ml-2" render={<Link href="/blog" />}>
+          <Button variant="ghost" className="mb-8 -ml-2 text-primary/60 hover:text-brandRed" render={<Link href="/blog" />}>
             ← Blog'a Dön
           </Button>
 
+          {post.category && (
+            <div className="inline-block bg-gray-100 text-primary border border-gray-200 uppercase tracking-widest text-[10px] font-bold px-3 py-1 mb-4 rounded-sm">
+              {post.category.title}
+            </div>
+          )}
+
           {post.publishedAt && (
-            <time className="text-sm text-muted-foreground block mb-4">
+            <time className="text-[10px] uppercase tracking-widest text-brandRed font-bold block mb-4">
               {formatDate(post.publishedAt)}
             </time>
           )}
 
-          <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-display leading-tight mb-8">{post.title}</h1>
 
           {post.excerpt && (
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">{post.excerpt}</p>
+            <p className="text-xl text-primary/70 mb-10 leading-relaxed font-medium">{post.excerpt}</p>
           )}
         </FadeIn>
 
         {post.mainImage && (
           <FadeIn delay={0.15}>
-            <div className="relative h-64 md:h-96 rounded-xl overflow-hidden mb-12">
+            <div className="relative h-72 md:h-[450px] overflow-hidden mb-16 rounded-sm shadow-sm">
               <SanityImage
                 image={post.mainImage}
                 fill
@@ -80,7 +87,22 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         <FadeIn delay={0.25}>
-          <RichText value={post.body} />
+          <div className="prose prose-lg dark:prose-invert prose-headings:font-display max-w-none">
+            <RichText value={post.body} />
+          </div>
+
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-16 pt-8 border-t border-black/10 flex flex-wrap items-center gap-2">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary/40 mr-2">
+                Etiketler:
+              </span>
+              {post.tags.map((tag: string) => (
+                <span key={tag} className="text-[10px] text-primary/70 bg-black/5 hover:bg-black/10 transition-colors border border-transparent px-3 py-1.5 rounded-sm uppercase tracking-wider font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </FadeIn>
       </article>
     </>

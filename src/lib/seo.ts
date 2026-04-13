@@ -19,6 +19,7 @@ type BuildMetadataParams = {
   canonicalPath?: string;
   noIndex?: boolean;
   pageSeo?: PageSeo;
+  keywords?: string[];
 };
 
 export async function buildMetadata(params: BuildMetadataParams = {}): Promise<Metadata> {
@@ -72,6 +73,7 @@ export async function buildMetadata(params: BuildMetadataParams = {}): Promise<M
       apple: faviconUrl,
     },
     robots: noIndex ? "noindex, nofollow" : "index, follow",
+    ...(params.keywords && params.keywords.length > 0 && { keywords: params.keywords }),
     ...(canonicalUrl && { alternates: { canonical: canonicalUrl } }),
     ...(defaults?.searchConsole && {
       verification: {
