@@ -66,10 +66,6 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <h1 className="text-4xl md:text-5xl font-display leading-tight mb-8">{post.title}</h1>
-
-          {post.excerpt && (
-            <p className="text-xl text-primary/70 mb-10 leading-relaxed font-medium">{post.excerpt}</p>
-          )}
         </FadeIn>
 
         {post.mainImage && (
