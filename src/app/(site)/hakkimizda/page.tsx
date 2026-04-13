@@ -46,7 +46,7 @@ export default async function AboutPage() {
             </FadeIn>
             
             <FadeIn delay={0.2}>
-              <div className="space-y-6 max-w-xl text-gray-600 font-display text-lg leading-relaxed prose prose-zinc prose-a:text-brandRed">
+              <div className="space-y-6 max-w-xl font-display text-lg leading-relaxed prose prose-zinc prose-a:text-brandRed">
                   <RichText value={data?.body} />
               </div>
             </FadeIn>

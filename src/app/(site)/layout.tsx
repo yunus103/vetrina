@@ -14,7 +14,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const isDraft = (await draftMode()).isEnabled;
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
       <SmoothScroll>
         {isDraft && (
           <div className="fixed top-0 left-0 right-0 z-50 bg-yellow-400 text-yellow-900 text-center text-sm py-2 font-medium">
