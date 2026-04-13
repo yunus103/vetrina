@@ -56,6 +56,7 @@ export function HeroSlider({ data }: HeroProps) {
                 sizes="100vw"
                 className="object-cover"
                 priority={index === 0}
+                noBlur={index === 0}
               />
             </div>
           )}

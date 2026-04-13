@@ -17,6 +17,7 @@ type SanityImageProps = {
   fit?: "crop" | "fill" | "fillmax" | "max" | "scale" | "min";
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
   quality?: number;
+  noBlur?: boolean;
 };
 
 export function SanityImage({
@@ -30,6 +31,7 @@ export function SanityImage({
   fit = "crop",
   objectFit,
   quality,
+  noBlur = false,
 }: SanityImageProps) {
   if (!image?.asset) return null;
 
@@ -59,6 +61,8 @@ export function SanityImage({
 
   if (!imageUrl) return null;
 
+  const useBlur = !noBlur && Boolean(blurDataURL);
+
   return (
     <Image
       src={imageUrl}
@@ -73,8 +77,8 @@ export function SanityImage({
         objectPosition,
         objectFit: objectFit || (fill ? "cover" : undefined) 
       }}
-      placeholder={blurDataURL ? "blur" : "empty"}
-      blurDataURL={blurDataURL}
+      placeholder={useBlur ? "blur" : "empty"}
+      blurDataURL={useBlur ? blurDataURL : undefined}
     />
   );
 }
