@@ -66,7 +66,7 @@ export function ProjectsGrid({ data }: ProjectsProps) {
           href="/projeler"
           className="group relative overflow-hidden bg-primary text-white px-10 py-4 rounded-full font-display text-sm uppercase tracking-[0.2em] transition-all duration-500 hover:pr-14 hover:bg-brandRed"
         >
-          <span className="relative z-10 transition-colors">Tüm Projeleri Gör</span>
+          <span className="relative z-10 transition-colors">Tüm Tasarımlarımız</span>
           <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
             arrow_forward
           </span>
