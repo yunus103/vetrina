@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { cn } from "@/lib/utils";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 type NavItem = {
   label: string;
@@ -104,12 +105,10 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
         className="md:hidden relative z-[70] w-10 h-10 flex items-center justify-center"
         onClick={() => setMenuOpen(!menuOpen)}
       >
-        <span className={cn(
-          "material-symbols-outlined text-3xl transition-colors duration-300",
-          menuOpen ? 'text-primary' : textClass.split(' ')[0]
-        )}>
-          {menuOpen ? 'close' : 'menu'}
-        </span>
+        {menuOpen
+          ? <X size={28} className={cn("transition-colors duration-300", "text-primary")} />
+          : <Menu size={28} className={cn("transition-colors duration-300", textClass)} />
+        }
       </button>
 
       {/* Mobile Menu Overlay */}
@@ -192,9 +191,11 @@ function DesktopNavItem({ item, active, scrolled }: { item: NavItem; active: boo
         )}
       >
         {item.label}
-        <span className="material-symbols-outlined text-[10px] leading-none transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
-          expand_more
-        </span>
+        <ChevronDown
+          size={12}
+          className="transition-transform duration-200"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}
+        />
       </Link>
       
       {/* Dropdown Menu */}

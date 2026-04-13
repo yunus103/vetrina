@@ -1,7 +1,6 @@
-'use client';
-
 import { SanityImage } from '@/components/ui/SanityImage';
 import { ContactForm } from '@/components/contact/ContactForm';
+import { MapPin, Mail, Phone } from 'lucide-react';
 
 interface ContactProps {
   data: {
@@ -23,9 +22,9 @@ export function ContactSection({ data, settings }: ContactProps) {
         {data.gorsel && (
              <SanityImage
              image={data.gorsel}
-             width={800}
-             height={800}
-             className="w-full h-full object-cover brightness-[0.9] absolute inset-0"
+             fill={true}
+             sizes="(max-width: 768px) 100vw, 50vw"
+             className="object-cover brightness-[0.9]"
            />
         )}
         <div className="absolute inset-0 bg-black/40"></div>
@@ -38,7 +37,7 @@ export function ContactSection({ data, settings }: ContactProps) {
             {address && (
                 <div className="flex items-start gap-4 md:gap-6 group">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
-                    <span className="material-symbols-outlined text-white text-xl">location_on</span>
+                    <MapPin size={20} className="text-white" />
                 </div>
                 <div>
                     <span className="text-[9px] tracking-widest uppercase opacity-50 block mb-1">Stüdyo Adresi</span>
@@ -49,7 +48,7 @@ export function ContactSection({ data, settings }: ContactProps) {
             {email && (
                 <div className="flex items-start gap-4 md:gap-6 group">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
-                    <span className="material-symbols-outlined text-white text-xl">mail</span>
+                    <Mail size={20} className="text-white" />
                 </div>
                 <div>
                     <span className="text-[9px] tracking-widest uppercase opacity-50 block mb-1">E-posta</span>
@@ -62,7 +61,7 @@ export function ContactSection({ data, settings }: ContactProps) {
             {phone && (
                 <div className="flex items-start gap-4 md:gap-6 group">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
-                    <span className="material-symbols-outlined text-white text-xl">call</span>
+                    <Phone size={20} className="text-white" />
                 </div>
                 <div>
                     <span className="text-[9px] tracking-widest uppercase opacity-50 block mb-1">Telefon</span>

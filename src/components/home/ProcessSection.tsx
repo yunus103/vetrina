@@ -3,6 +3,22 @@
 import { motion } from 'framer-motion';
 import { SanityImage } from '@/components/ui/SanityImage';
 import React, { useState } from 'react';
+import {
+  Search,
+  LayoutTemplate,
+  Palette,
+  CheckCircle2,
+  Globe,
+  Settings,
+  Star,
+  Layers,
+  Brain,
+  Box,
+  Wrench,
+  CheckCheck,
+  ArrowDown,
+  type LucideIcon,
+} from 'lucide-react';
 
 interface ProcessStep {
   numara: string;
@@ -30,6 +46,30 @@ const mockData: { baslik: string; altBaslik: string; adimlar: ProcessStep[] } = 
     { numara: "04", baslik: "Uygulama", ikon: "verified", aciklama: "Tasarımlarımızı profesyonel ekibimizle hayata geçiriyoruz.", gorsel: null },
   ]
 };
+
+// Map Sanity CMS icon name strings → Lucide icon components
+const iconMap: Record<string, LucideIcon> = {
+  // Orijinal mock data isimleri
+  search: Search,
+  architecture: LayoutTemplate,
+  palette: Palette,
+  verified: CheckCircle2,
+  globe: Globe,
+  settings: Settings,
+  layers: Layers,
+  // Gerçek CMS'deki Material Symbol isimleri → Lucide karşılıkları
+  psychology: Brain,
+  view_in_ar: Box,
+  handyman: Wrench,
+  done_all: CheckCheck,
+  // Genel fallback'lar
+  star: Star,
+};
+
+function CmsIcon({ name, className }: { name: string; className?: string }) {
+  const Icon = iconMap[name?.toLowerCase()] ?? Star;
+  return <Icon className={className} />;
+}
 
 export function ProcessSection({ data }: ProcessProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -99,9 +139,10 @@ export function ProcessSection({ data }: ProcessProps) {
                     {step.numara}
                   </span>
                   {step.ikon && (
-                    <span className="material-symbols-outlined text-3xl text-brandRed opacity-40 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-12">
-                      {step.ikon}
-                    </span>
+                    <CmsIcon
+                      name={step.ikon}
+                      className="w-8 h-8 text-brandRed opacity-40 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-12"
+                    />
                   )}
                 </div>
                 
@@ -153,9 +194,10 @@ export function ProcessSection({ data }: ProcessProps) {
               className="group relative overflow-hidden bg-primary text-white px-10 py-4 rounded-full font-display text-sm uppercase tracking-[0.2em] transition-all duration-500 hover:pr-14 hover:bg-brandRed"
             >
               <span className="relative z-10 transition-colors">Hayalinizdeki Ofisi Tasarlayalım</span>
-              <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
-                arrow_downward
-              </span>
+              <ArrowDown
+                size={16}
+                className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0"
+              />
             </a>
           </motion.div>
         </div>

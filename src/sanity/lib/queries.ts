@@ -21,26 +21,31 @@ export const layoutQuery = groq`{
 
 // ─── Sayfalar ──────────────────────────────────────────────────────────────────
 
-export const homePageQuery = groq`*[_type == "homePage"][0] {
-  hero { slider[] { baslik, altBaslik, etiket, aciklama,
-    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
-  hakkimizda { etiket, baslik, altBaslik, icerik,
-    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
-  hizmetlerimiz { baslik,
-    liste[] { baslik, aciklama,
+export const homePageQuery = groq`{
+  "page": *[_type == "homePage"][0] {
+    hero { slider[] { baslik, altBaslik, etiket, aciklama,
       gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
-  surec { baslik, altBaslik,
-    adimlar[] { numara, baslik, ikon, aciklama,
-      gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
-  projelerSection { etiket, baslik,
-    liste[]->{ title, "slug": slug.current, category,
-      mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
-  referanslar { baslik,
-    liste[] { ad,
-      logo { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
-  iletisimSection { baslik, etiket,
-    gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
-  seo
+    hakkimizda { etiket, baslik, altBaslik, icerik,
+      gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
+    hizmetlerimiz { baslik,
+      liste[] { baslik, aciklama,
+        gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+    surec { baslik, altBaslik,
+      adimlar[] { numara, baslik, ikon, aciklama,
+        gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+    projelerSection { etiket, baslik,
+      liste[]->{ title, "slug": slug.current, category,
+        mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+    referanslar { baslik,
+      liste[] { ad,
+        logo { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+    iletisimSection { baslik, etiket,
+      gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } },
+    seo
+  },
+  "settings": *[_type == "siteSettings"][0] {
+    contactInfo { phone, email, address, whatsappNumber }
+  }
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0] {

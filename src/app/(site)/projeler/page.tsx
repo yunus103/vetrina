@@ -5,6 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 import { FadeIn } from "@/components/ui/FadeIn";
 import Link from "next/link";
 import { SanityImage } from "@/components/ui/SanityImage";
+import { ArrowUpRight } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
@@ -47,7 +48,7 @@ export default async function ProjectsPage() {
                         {/* Overlay info that appears on hover for mobile/tablet feel */}
                         <div className="absolute inset-0 flex items-end p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/60 to-transparent">
                              <div className="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                 <span className="material-symbols-outlined text-4xl mb-2">arrow_outward</span>
+                                 <ArrowUpRight size={36} className="mb-2" />
                              </div>
                         </div>
                      </div>

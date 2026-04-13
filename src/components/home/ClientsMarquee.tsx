@@ -23,6 +23,7 @@ export function ClientsMarquee({ data }: TestimonialsProps) {
            <SanityImage 
              image={item.logo}
              fill={true}
+             sizes="(max-width: 768px) 144px, 224px"
              objectFit="contain"
              className="object-contain"
            />

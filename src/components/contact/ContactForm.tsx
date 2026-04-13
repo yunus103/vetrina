@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema, ContactFormData } from '@/lib/schemas/contact';
 import { sendContactEmail } from '@/app/actions/contact';
 import { toast } from 'sonner';
+import { ArrowRight } from 'lucide-react';
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,7 +85,7 @@ export function ContactForm() {
           className="w-full group flex items-center justify-between bg-primary text-white px-6 py-4 uppercase text-[10px] tracking-[0.3em] font-medium hover:bg-brandRed transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span>{isSubmitting ? 'GÖNDERİLİYOR...' : 'MESAJ GÖNDER'}</span>
-          {!isSubmitting && <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>}
+          {!isSubmitting && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
         </button>
       </div>
     </form>

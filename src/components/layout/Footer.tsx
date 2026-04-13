@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { SanityImage } from '@/components/ui/SanityImage';
-import { FaInstagram, FaFacebookF, FaLinkedinIn, FaLink } from 'react-icons/fa';
-import { FaXTwitter } from "react-icons/fa6";
+import { Instagram, Twitter, Linkedin, Facebook, Link2 } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -15,14 +14,14 @@ interface SocialLink {
   url: string;
 }
 
-const getSocialIcon = (platform: string) => {
+function getSocialIcon(platform: string) {
   const p = platform.toLowerCase();
-  if (p.includes('instagram')) return <FaInstagram />;
-  if (p.includes('twitter') || p.includes('x')) return <FaXTwitter />;
-  if (p.includes('linkedin')) return <FaLinkedinIn />;
-  if (p.includes('facebook')) return <FaFacebookF />;
-  return <FaLink />;
-};
+  if (p.includes('instagram')) return <Instagram size={20} />;
+  if (p.includes('twitter') || p.includes('x')) return <Twitter size={20} />;
+  if (p.includes('linkedin')) return <Linkedin size={20} />;
+  if (p.includes('facebook')) return <Facebook size={20} />;
+  return <Link2 size={20} />;
+}
 
 function resolveHref(item: NavItem): string {
   return item.href || "#";
@@ -32,7 +31,6 @@ export function Footer({ settings, navigation }: { settings: any; navigation: an
   const socialLinks: SocialLink[] = settings?.socialLinks || [];
   const footerLinks: NavItem[] = navigation?.footerLinks || [];
   
-  const instagramLink = socialLinks.find(s => s.platform.toLowerCase().includes('instagram'))?.url;
   const currentYear = new Date().getFullYear();
 
   return (
@@ -74,7 +72,7 @@ export function Footer({ settings, navigation }: { settings: any; navigation: an
                 className="flex items-center gap-4 group transition-all w-fit"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-all shrink-0">
-                  <span className="text-white/60 group-hover:text-white text-xl md:text-2xl transition-colors">
+                  <span className="text-white/60 group-hover:text-white transition-colors">
                     {getSocialIcon(item.platform)}
                   </span>
                 </div>

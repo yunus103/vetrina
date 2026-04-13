@@ -2,12 +2,11 @@ import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { blogListQuery } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/lib/seo";
-import { AnimateGroup } from "@/components/ui/AnimateGroup";
-import { fadeUpItem } from "@/components/ui/AnimateGroup";
+import { AnimateGroup, fadeUpItem } from "@/components/ui/AnimateGroup";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { formatDate } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { ArrowRight, FileText } from "lucide-react";
 import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,7 +49,6 @@ export default async function BlogListPage() {
                           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 blur-0"
                         />
                       )}
-                      {/* Subtitle Overlay or Date Overlay if premium */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
 
@@ -77,7 +75,7 @@ export default async function BlogListPage() {
 
                       <div className="pt-2 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-primary group-hover:translate-x-2 transition-transform duration-300">
                         Devamını Oku
-                        <span className="material-symbols-outlined text-sm">east</span>
+                        <ArrowRight size={14} />
                       </div>
                     </div>
                   </article>
@@ -88,7 +86,7 @@ export default async function BlogListPage() {
         ) : (
           <FadeIn>
             <div className="flex flex-col items-center justify-center py-32 border border-dashed border-gray-200 rounded-lg">
-                <span className="material-symbols-outlined text-5xl opacity-20 mb-4">edit_note</span>
+                <FileText size={48} className="opacity-20 mb-4" />
                 <p className="text-primary/40 uppercase tracking-[0.2em] text-xs">Henüz yayınlanmış bir yazı bulunmuyor.</p>
             </div>
           </FadeIn>

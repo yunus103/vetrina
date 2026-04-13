@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getClient } from "@/sanity/lib/client";
-import { homePageQuery, layoutQuery } from "@/sanity/lib/queries";
+import { homePageQuery } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/lib/seo";
 
 import { HeroSlider } from "@/components/home/HeroSlider";
@@ -13,18 +13,20 @@ import { ClientsMarquee } from "@/components/home/ClientsMarquee";
 import { ContactSection } from "@/components/home/ContactSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getClient().fetch(homePageQuery, {}, { next: { tags: ["home"] } });
+  const result = await getClient().fetch(homePageQuery, {}, { next: { tags: ["home"] } });
   return buildMetadata({
     canonicalPath: "/",
-    pageSeo: data?.seo,
+    pageSeo: result?.page?.seo,
   });
 }
 
 export default async function HomePage() {
   const isDraft = (await draftMode()).isEnabled;
   const client = getClient(isDraft);
-  const data = await client.fetch(homePageQuery, {}, { next: { tags: ["home"] } });
-  const layoutData = await client.fetch(layoutQuery, {}, { next: { tags: ["layout"] } });
+  const result = await client.fetch(homePageQuery, {}, { next: { tags: ["home"] } });
+
+  const data = result?.page;
+  const settings = result?.settings;
 
   return (
     <>
@@ -34,7 +36,7 @@ export default async function HomePage() {
       <ProcessSection data={data?.surec} />
       <ProjectsGrid data={data?.projelerSection} />
       <ClientsMarquee data={data?.referanslar} />
-      <ContactSection data={data?.iletisimSection} settings={layoutData?.settings} />
+      <ContactSection data={data?.iletisimSection} settings={settings} />
     </>
   );
 }

@@ -43,6 +43,9 @@ export function SanityImage({
   // Eğer fill değilse, CDN tarafında görseli tam istediğimiz boyuta çekiyoruz
   if (!fill && builder) {
     builder = builder.width(width).height(height).fit(fit);
+  } else if (fill && builder) {
+    // fill modunda maksimum genişlik kısıtlaması — orijinal boyutlu görsel inmesini önle
+    builder = builder.width(1920).fit('max');
   }
 
   const imageUrl = builder?.url();

@@ -1,6 +1,7 @@
 'use client';
 
 import { SanityImage } from '@/components/ui/SanityImage';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
 interface Slide {
@@ -95,14 +96,14 @@ export function HeroSlider({ data }: HeroProps) {
             aria-label="Önceki Slayt"
             className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all group"
           >
-            <span className="material-symbols-outlined text-sm md:text-base transition-transform group-hover:-translate-x-1">west</span>
+            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
           </button>
           <button 
             onClick={nextSlide}
             aria-label="Sonraki Slayt"
             className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center text-black hover:bg-opacity-80 transition-all group"
           >
-            <span className="material-symbols-outlined text-sm md:text-base transition-transform group-hover:translate-x-1">east</span>
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>

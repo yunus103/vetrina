@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SanityImage } from '@/components/ui/SanityImage';
+import { Expand, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface LightboxGalleryProps {
   images: any[];
@@ -73,7 +74,7 @@ export function LightboxGallery({ images }: LightboxGalleryProps) {
             {/* Hover overlay with icon */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500 flex items-center justify-center">
                 <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500">
-                    <span className="material-symbols-outlined text-3xl">open_in_full</span>
+                    <Expand size={24} />
                 </div>
             </div>
           </div>
@@ -98,7 +99,7 @@ export function LightboxGallery({ images }: LightboxGalleryProps) {
                 className="w-12 h-12 flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer group"
                 onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
               >
-                <span className="material-symbols-outlined text-4xl transform group-hover:rotate-90 transition-transform duration-300">close</span>
+              <X size={36} className="transform group-hover:rotate-90 transition-transform duration-300" />
               </button>
             </div>
 
@@ -112,7 +113,7 @@ export function LightboxGallery({ images }: LightboxGalleryProps) {
                     paginate(-1);
                   }}
                 >
-                  <span className="material-symbols-outlined text-6xl transform group-hover:-translate-x-2 transition-transform">chevron_left</span>
+                  <ChevronLeft size={56} className="transform group-hover:-translate-x-2 transition-transform" />
                 </button>
                 <button 
                   className="hidden md:flex absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer z-20 group"
@@ -121,7 +122,7 @@ export function LightboxGallery({ images }: LightboxGalleryProps) {
                     paginate(1);
                   }}
                 >
-                  <span className="material-symbols-outlined text-6xl transform group-hover:translate-x-2 transition-transform">chevron_right</span>
+                  <ChevronRight size={56} className="transform group-hover:translate-x-2 transition-transform" />
                 </button>
               </>
             )}

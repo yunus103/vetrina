@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { SanityImage } from '@/components/ui/SanityImage';
@@ -31,6 +29,7 @@ export function AboutSection({ data }: AboutProps) {
                 <SanityImage
                   image={data.gorsel}
                   fill={true}
+                  sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover relative z-10"
                   priority
                 />

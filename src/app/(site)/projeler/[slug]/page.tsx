@@ -9,6 +9,7 @@ import { SanityImage } from "@/components/ui/SanityImage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { LightboxGallery } from "@/components/ui/LightboxGallery";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -45,7 +46,7 @@ export default async function ProjectPage({ params }: Props) {
       <div className="pt-32 pb-16 px-6 md:px-12 text-center md:text-left max-w-7xl mx-auto">
         <FadeIn direction="up">
           <Link href="/projeler" className="inline-flex items-center gap-2 text-[10px] tracking-widest uppercase mb-12 hover:text-brandRed transition-colors opacity-60">
-            <span className="material-symbols-outlined text-sm">west</span>
+            <ArrowLeft size={14} />
             Projeler
           </Link>
           
