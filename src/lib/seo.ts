@@ -73,6 +73,11 @@ export async function buildMetadata(params: BuildMetadataParams = {}): Promise<M
     },
     robots: noIndex ? "noindex, nofollow" : "index, follow",
     ...(canonicalUrl && { alternates: { canonical: canonicalUrl } }),
+    ...(defaults?.searchConsole && {
+      verification: {
+        google: defaults.searchConsole,
+      },
+    }),
     openGraph: {
       title: title || "",
       description: description || "",

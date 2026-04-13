@@ -11,7 +11,7 @@ export const layoutQuery = groq`{
     favicon { asset->{ _id, url } },
     contactInfo { phone, email, address, whatsappNumber, mapIframe },
     socialLinks[] { platform, url },
-    gaId, gtmId
+    gaId, gtmId, searchConsole
   },
   "navigation": *[_type == "navigation"][0] {
     headerLinks[] { label, href, openInNewTab, subLinks[] { label, href, openInNewTab } },
@@ -143,5 +143,6 @@ export const defaultSeoQuery = groq`*[_type == "siteSettings"][0] {
   "ogImage": defaultOgImage,
   siteName,
   siteTagline,
+  searchConsole,
   favicon { asset->{ _id, url } }
 }`;
