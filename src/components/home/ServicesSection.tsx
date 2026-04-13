@@ -31,6 +31,7 @@ export function ServicesSection({ data }: ServicesProps) {
                   image={service.gorsel}
                   width={800}
                   height={600}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 transform group-hover:scale-105"
                 />
               )}

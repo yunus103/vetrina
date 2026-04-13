@@ -3,8 +3,17 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { buildMetadata } from "@/lib/seo";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair-display" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair-display",
+  display: "swap",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata();
