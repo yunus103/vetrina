@@ -73,7 +73,7 @@ export const blogListQuery = groq`*[_type == "blogPost"] | order(publishedAt des
 }`;
 
 export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug][0] {
-  title, slug, publishedAt, _updatedAt, excerpt, category->{title}, tags,
+  title, slug, publishedAt, _updatedAt, excerpt, category->{title, "slug": slug.current}, tags,
   mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
   body[] {
     ...,
@@ -84,6 +84,17 @@ export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current ==
   },
   seo
 }`;
+
+export const blogPostsByCategoryQuery = groq`*[_type == "blogPost" && category->slug.current == $slug] | order(publishedAt desc) {
+  title, slug, excerpt, publishedAt,
+  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  category->{title, "slug": slug.current}
+}`;
+
+export const categoryBySlugQuery = groq`*[_type == "blogCategory" && slug.current == $slug][0] {
+  title, description, slug
+}`;
+
 
 // ─── Hizmetler ─────────────────────────────────────────────────────────────────
 
@@ -130,6 +141,7 @@ export const legalPageBySlugQuery = groq`*[_type == "legalPage" && slug.current 
 
 export const allSlugsForSitemapQuery = groq`{
   "blogPosts": *[_type == "blogPost" && defined(slug.current)] { "slug": slug.current, _updatedAt },
+  "blogCategories": *[_type == "blogCategory" && defined(slug.current)] { "slug": slug.current },
   "services": *[_type == "service" && defined(slug.current)] { "slug": slug.current, _updatedAt },
   "projects": *[_type == "project" && defined(slug.current)] { "slug": slug.current, _updatedAt },
   "legalPages": *[_type == "legalPage" && defined(slug.current)] { "slug": slug.current, _updatedAt }

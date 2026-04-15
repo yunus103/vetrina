@@ -54,9 +54,9 @@ export default async function BlogPostPage({ params }: Props) {
           </Button>
 
           {post.category && (
-            <div className="inline-block bg-gray-100 text-primary border border-gray-200 uppercase tracking-widest text-[10px] font-bold px-3 py-1 mb-4 rounded-sm">
+            <Link href={`/blog/kategori/${post.category.slug}`} className="inline-block bg-gray-100 dark:bg-white/5 text-primary border border-gray-200 dark:border-white/10 uppercase tracking-widest text-[10px] font-bold px-3 py-1 mb-4 rounded-sm hover:bg-brandRed hover:text-white hover:border-brandRed transition-all duration-300">
               {post.category.title}
-            </div>
+            </Link>
           )}
 
           {post.publishedAt && (

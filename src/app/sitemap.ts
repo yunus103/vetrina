@@ -21,6 +21,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })) || []),
+    ...(data?.blogCategories?.map((p: any) => ({
+      url: `${base}/blog/kategori/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+    })) || []),
     ...(data?.services?.map((p: any) => ({
       url: `${base}/hizmetler/${p.slug}`,
       lastModified: new Date(p._updatedAt),
