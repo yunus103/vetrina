@@ -18,7 +18,7 @@ const navItemFields = [
       type: "object",
       fields: [
         defineField({ name: "label", title: "Etiket", type: "string", validation: (Rule) => Rule.required() }),
-        defineField({ name: "href", title: "Link / Path", type: "string", description: "Örn: /blog/ilk-yazi" }),
+        defineField({ name: "href", title: "Link / Path", type: "string", description: "Örn: /ilk-yazi" }),
         defineField({ name: "openInNewTab", title: "Yeni Sekmede Aç", type: "boolean", initialValue: false }),
       ],
     }],

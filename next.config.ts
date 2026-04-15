@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
       "@portabletext/react",
     ],
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/blog/:slug",
+        destination: "/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

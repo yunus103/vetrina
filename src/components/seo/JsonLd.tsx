@@ -35,7 +35,7 @@ export function articleJsonLd(post: any) {
     "@type": "Article",
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${getSiteUrl()}/blog/${post?.slug?.current || post?.slug || ""}`,
+      "@id": `${getSiteUrl()}/${post?.slug?.current || post?.slug || ""}`,
     },
     headline: post?.title,
     ...(imageUrl && { image: [imageUrl] }),

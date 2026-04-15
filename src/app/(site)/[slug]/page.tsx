@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: post.title,
     description: post.excerpt,
-    canonicalPath: `/blog/${slug}`,
+    canonicalPath: `/${slug}`,
     pageSeo: post.seo,
     keywords: post.tags,
   });

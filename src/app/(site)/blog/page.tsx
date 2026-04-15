@@ -36,7 +36,7 @@ export default async function BlogListPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-x-10 md:gap-y-20">
             {posts.map((post: any, index: number) => (
               <FadeIn key={post.slug?.current || index} delay={index * 0.05 + 0.1}>
-                <Link href={`/blog/${post.slug?.current}`} className="group block">
+                <Link href={`/${post.slug?.current}`} className="group block">
                   <article className="space-y-6">
                     {/* Image Container */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 rounded-sm">
