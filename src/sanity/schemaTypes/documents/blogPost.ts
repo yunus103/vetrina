@@ -13,7 +13,24 @@ export const blogPostType = defineType({
       title: "Kapak Görseli",
       type: "image",
       options: { hotspot: true },
-      fields: [defineField({ name: "alt", title: "Alt Metni", type: "string", validation: (Rule) => Rule.required() })],
+      description: "Önerilen Boyut: 1200x600px (2:1 oranı). Eğer görselde logonuz vb. kesiliyorsa Sanity'nin 'Hotspot' (hedef simgesi) özelliğini kullanarak o bölgeye odaklanabilir veya aşağıdaki Görsel Sığdırma seçeneğini 'Contain' yapabilirsiniz.",
+      fields: [
+        defineField({ name: "alt", title: "Alt Metni", type: "string", validation: (Rule) => Rule.required() }),
+        defineField({
+          name: "objectFit",
+          title: "Görsel Sığdırma (Object Fit)",
+          type: "string",
+          options: {
+            list: [
+              { title: "Kırparak Doldur (Cover - Standart)", value: "cover" },
+              { title: "Tamamını Göster (Contain - Boşluklu)", value: "contain" }
+            ],
+            layout: "radio"
+          },
+          initialValue: "cover",
+          description: "Görselin çerçeveye nasıl oturacağını seçin. Contain seçerseniz tüm görsel gösterilir ancak yanlarda çerçeve renginde boşluk kalabilir."
+        })
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({

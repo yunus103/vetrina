@@ -70,12 +70,13 @@ export default async function BlogPostPage({ params }: Props) {
 
         {post.mainImage && (
           <FadeIn delay={0.15}>
-            <div className="relative h-72 md:h-[450px] overflow-hidden mb-16 rounded-sm shadow-sm">
+            <div className="relative aspect-[2/1] w-full overflow-hidden mb-16 rounded-sm shadow-sm">
               <SanityImage
                 image={post.mainImage}
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"
-                className="object-cover"
+                className="transition-transform duration-500"
+                objectFit={post.mainImage.objectFit}
                 priority
               />
             </div>

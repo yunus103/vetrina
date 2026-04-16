@@ -45,8 +45,10 @@ export default async function BlogListPage() {
                           image={post.mainImage}
                           width={800}
                           height={500}
+                          fit={post.mainImage.objectFit === 'contain' ? 'max' : 'crop'}
+                          objectFit={post.mainImage.objectFit}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 blur-0"
+                          className="w-full h-full transition-transform duration-1000 group-hover:scale-110 blur-0"
                         />
                       )}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>

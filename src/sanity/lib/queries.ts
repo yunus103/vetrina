@@ -69,12 +69,12 @@ export const contactPageQuery = groq`*[_type == "contactPage"][0] {
 
 export const blogListQuery = groq`*[_type == "blogPost"] | order(publishedAt desc) {
   title, slug, excerpt, publishedAt,
-  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop }
+  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, objectFit, hotspot, crop }
 }`;
 
 export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug][0] {
   title, slug, publishedAt, _updatedAt, excerpt, category->{title, "slug": slug.current}, tags,
-  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, objectFit, hotspot, crop },
   body[] {
     ...,
     _type == "image" => {
@@ -87,7 +87,7 @@ export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current ==
 
 export const blogPostsByCategoryQuery = groq`*[_type == "blogPost" && category->slug.current == $slug] | order(publishedAt desc) {
   title, slug, excerpt, publishedAt,
-  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  mainImage { asset->{ _id, url, metadata { lqip, dimensions } }, alt, objectFit, hotspot, crop },
   category->{title, "slug": slug.current}
 }`;
 
