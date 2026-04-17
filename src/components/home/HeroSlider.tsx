@@ -3,6 +3,7 @@
 import { SanityImage } from '@/components/ui/SanityImage';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { urlForImage } from '@/sanity/lib/image';
 
 interface Slide {
   baslik: string;
@@ -30,6 +31,30 @@ export function HeroSlider({ data }: HeroProps) {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  // Slide 0 Next.js priority ile geliyor; 1+ mount sonrası prefetch edilir
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    slides.slice(1).forEach((slide) => {
+      if (!slide.gorsel?.asset) return;
+      try {
+        const url = urlForImage(slide.gorsel)
+          ?.auto('format')
+          .width(1920)
+          .quality(90)
+          .url();
+        if (!url || document.querySelector(`link[href="${url}"]`)) return;
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.as = 'image';
+        link.href = url;
+        document.head.appendChild(link);
+      } catch {
+        // prefetch başarısız olursa sessizce geç
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
@@ -53,10 +78,11 @@ export function HeroSlider({ data }: HeroProps) {
               <SanityImage
                 image={slide.gorsel}
                 fill={true}
-                sizes="100vw"
+                sizes="(max-width: 1920px) 100vw, 1920px"
                 className="object-cover"
                 priority={index === 0}
                 noBlur={index === 0}
+                quality={90}
               />
             </div>
           )}
