@@ -21,6 +21,7 @@ function resolveHref(item: NavItem): string {
 export function Header({ settings, navigation }: { settings: any; navigation: any }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const links: NavItem[] = navigation?.headerLinks || [];
 
@@ -30,6 +31,7 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
   }, [pathname]);
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -48,7 +50,7 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
 
   const navBaseClass = "fixed top-0 left-0 w-full z-50 px-6 md:px-8 flex justify-between items-center transition-[background-color,padding,box-shadow,backdrop-filter] duration-500 ease-in-out";
   
-  const isTransparent = pathname === "/" && !isScrolled;
+  const isTransparent = isMounted && pathname === "/" && !isScrolled;
 
   const scrolledClass = isTransparent 
     ? "bg-transparent py-4 md:py-6" 
