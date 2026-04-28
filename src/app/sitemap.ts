@@ -3,6 +3,8 @@ import { client } from "@/sanity/lib/client";
 import { allSlugsForSitemapQuery } from "@/sanity/lib/queries";
 import { getSiteUrl } from "@/lib/utils";
 
+export const revalidate = 0;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
   const data = await client.fetch(allSlugsForSitemapQuery);
