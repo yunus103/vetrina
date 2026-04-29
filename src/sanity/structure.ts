@@ -25,6 +25,8 @@ export const structure: StructureResolver = (S) =>
               .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
             S.listItem().title("📬 İletişim").id("contactPage").schemaType("contactPage")
               .child(S.document().schemaType("contactPage").documentId("contactPage")),
+            S.listItem().title("🏆 Referanslarımız").id("referansPage").schemaType("referansPage")
+              .child(S.document().schemaType("referansPage").documentId("referansPage")),
           ])
         ),
       S.divider(),
@@ -33,4 +35,5 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("service").title("🛠 Hizmetler"),
       S.documentTypeListItem("project").title("💼 Projeler"),
       S.documentTypeListItem("legalPage").title("⚖️ Yasal Sayfalar"),
+      S.documentTypeListItem("referans").title("🏆 Referanslar"),
     ]);

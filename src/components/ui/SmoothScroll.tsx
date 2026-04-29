@@ -25,6 +25,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     });
 
     lenisRef.current = lenis;
+    // Expose globally so modal components can call lenis.stop() / lenis.start()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).lenis = lenis;
 
     let rafId: number;
     function raf(time: number) {
@@ -38,6 +41,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).lenis = undefined;
     };
   }, []);
 

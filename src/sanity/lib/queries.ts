@@ -132,6 +132,24 @@ export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $
   seo
 }`;
 
+// ─── Referanslar ───────────────────────────────────────────────────────────────
+
+export const referansPageQuery = groq`*[_type == "referansPage"][0] {
+  pageTitle, pageSubtitle, seo
+}`;
+
+export const referansListQuery = groq`*[_type == "referans"] | order(siraNo asc, _createdAt asc) {
+  firmaAdi, "slug": slug.current,
+  kapakGorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  firmaLogosu { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop }
+}`;
+
+export const referansBySlugQuery = groq`*[_type == "referans" && slug.current == $slug][0] {
+  firmaAdi, "slug": slug.current, kisaAciklama,
+  firmaLogosu { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
+  galeri[] { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop }
+}`;
+
 // ─── Yasal Sayfalar ────────────────────────────────────────────────────────────
 
 export const legalPageBySlugQuery = groq`*[_type == "legalPage" && slug.current == $slug][0] {
