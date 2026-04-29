@@ -30,7 +30,7 @@ export const homePageQuery = groq`{
     hizmetlerimiz { baslik,
       liste[] { baslik, aciklama, butonMetni,
         gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop },
-        galeri[] { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },
+        galeri[] { asset->{ _id, url, metadata { lqip, dimensions } }, alt, tasarimAdi, hotspot, crop } } },
     surec { baslik, altBaslik,
       adimlar[] { numara, baslik, ikon, aciklama,
         gorsel { asset->{ _id, url, metadata { lqip, dimensions } }, alt, hotspot, crop } } },

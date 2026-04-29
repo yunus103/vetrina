@@ -69,7 +69,11 @@ export const homePageType = defineType({
             { name: "galeri", title: "Örnek Çalışmalar Galerisi", type: "array",
               description: "Bu hizmete ait örnek çalışma fotoğrafları. Eklenirse kartta buton görünür.",
               of: [defineArrayMember({ type: "image", options: { hotspot: true },
-                fields: [{ name: "alt", title: "Alternatif Metin", type: "string" }] })] },
+                fields: [
+                  { name: "alt", title: "Alternatif Metin", type: "string" },
+                  { name: "tasarimAdi", title: "Tasarım Adı", type: "string",
+                    description: "Lightbox'ta resmin altında görünür. Örn: Novus, Timber, Milano" }
+                ] })] },
             { name: "butonMetni", title: "Buton Metni", type: "string",
               description: "Boş bırakılırsa 'Örnek Çalışmalar' olarak görünür.",
               placeholder: "Örnek Çalışmalar" }

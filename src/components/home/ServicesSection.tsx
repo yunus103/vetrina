@@ -169,7 +169,10 @@ export function ServicesSection({ data }: ServicesProps) {
 
             {/* Gallery Grid — reuse LightboxGallery but without standalone title (it's above) */}
             <div className="px-6 md:px-24 pb-24">
-              <LightboxGallery images={activeGallery.images} />
+              <LightboxGallery
+                images={activeGallery.images}
+                imageLabels={activeGallery.images.map((img: any) => img.tasarimAdi ?? "")}
+              />
             </div>
           </motion.div>
         )}

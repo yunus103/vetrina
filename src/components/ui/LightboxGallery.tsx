@@ -33,10 +33,11 @@ function prefetchLightboxImage(image: any) {
 
 interface LightboxGalleryProps {
   images: any[];
-  title?: string;
+  /** Her resim için ayrı alt etiket. imageLabels[i] boşsa o resimde gösterilmez. */
+  imageLabels?: string[];
 }
 
-export function LightboxGallery({ images, title }: LightboxGalleryProps) {
+export function LightboxGallery({ images, imageLabels }: LightboxGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const [direction, setDirection] = useState(0);
@@ -138,11 +139,11 @@ export function LightboxGallery({ images, title }: LightboxGalleryProps) {
               </button>
             </div>
 
-            {/* Bottom Title Bar */}
-            {title && (
+            {/* Bottom Label — per-image */}
+            {imageLabels && imageLabels[selectedImage] && (
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-10 pointer-events-none">
-                <p className="text-white/40 font-display text-xs tracking-[0.25em] uppercase mb-1">Örnek Çalışmalar</p>
-                <h3 className="text-white font-display text-2xl md:text-3xl tracking-tight">{title}</h3>
+                <p className="text-white/40 font-display text-xs tracking-[0.25em] uppercase mb-1">Tasarım</p>
+                <h3 className="text-white font-display text-2xl md:text-3xl tracking-tight">{imageLabels[selectedImage]}</h3>
               </div>
             )}
 
