@@ -65,7 +65,14 @@ export const homePageType = defineType({
             { name: "baslik", title: "Başlık", type: "string" },
             { name: "aciklama", title: "Açıklama", type: "text", rows: 3 },
             { name: "gorsel", title: "Görsel", type: "image", options: { hotspot: true },
-              fields: [{ name: "alt", title: "Alternatif Metin", type: "string" }] }
+              fields: [{ name: "alt", title: "Alternatif Metin", type: "string" }] },
+            { name: "galeri", title: "Örnek Çalışmalar Galerisi", type: "array",
+              description: "Bu hizmete ait örnek çalışma fotoğrafları. Eklenirse kartta buton görünür.",
+              of: [defineArrayMember({ type: "image", options: { hotspot: true },
+                fields: [{ name: "alt", title: "Alternatif Metin", type: "string" }] })] },
+            { name: "butonMetni", title: "Buton Metni", type: "string",
+              description: "Boş bırakılırsa 'Örnek Çalışmalar' olarak görünür.",
+              placeholder: "Örnek Çalışmalar" }
           ]})]
         }
       ]
