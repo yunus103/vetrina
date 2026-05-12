@@ -25,33 +25,48 @@ export function HeroSlider({ data }: HeroProps) {
 
   useEffect(() => {
     if (slides.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    
+    let interval: NodeJS.Timeout;
+    // Delay interval start so it doesn't immediately change slides after a long hydration block
+    const startTimeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }, 5000);
+    }, 1500);
+
+    return () => {
+      clearTimeout(startTimeout);
+      if (interval) clearInterval(interval);
+    };
   }, [slides.length]);
 
   // Slide 0 Next.js priority ile geliyor; 1+ mount sonrası prefetch edilir
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    slides.slice(1).forEach((slide) => {
-      if (!slide.gorsel?.asset) return;
-      try {
-        const url = urlForImage(slide.gorsel)
-          ?.auto('format')
-          .width(1920)
-          .quality(90)
-          .url();
-        if (!url || document.querySelector(`link[href="${url}"]`)) return;
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.as = 'image';
-        link.href = url;
-        document.head.appendChild(link);
-      } catch {
-        // prefetch başarısız olursa sessizce geç
-      }
-    });
+    
+    // Delay prefetch DOM manipulation to let main thread finish hydration & LCP
+    const prefetchTimer = setTimeout(() => {
+      slides.slice(1).forEach((slide) => {
+        if (!slide.gorsel?.asset) return;
+        try {
+          const url = urlForImage(slide.gorsel)
+            ?.auto('format')
+            .width(1920)
+            .quality(90)
+            .url();
+          if (!url || document.querySelector(`link[href="${url}"]`)) return;
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.as = 'image';
+          link.href = url;
+          document.head.appendChild(link);
+        } catch {
+          // prefetch başarısız olursa sessizce geç
+        }
+      });
+    }, 3000);
+
+    return () => clearTimeout(prefetchTimer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

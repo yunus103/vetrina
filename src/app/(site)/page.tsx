@@ -4,13 +4,15 @@ import { getClient } from "@/sanity/lib/client";
 import { homePageQuery } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/lib/seo";
 
+import dynamic from "next/dynamic";
 import { HeroSlider } from "@/components/home/HeroSlider";
-import { AboutSection } from "@/components/home/AboutSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { ProcessSection } from "@/components/home/ProcessSection";
-import { ProjectsGrid } from "@/components/home/ProjectsGrid";
-import { ClientsMarquee } from "@/components/home/ClientsMarquee";
-import { ContactSection } from "@/components/home/ContactSection";
+
+const AboutSection = dynamic(() => import("@/components/home/AboutSection").then((mod) => mod.AboutSection));
+const ServicesSection = dynamic(() => import("@/components/home/ServicesSection").then((mod) => mod.ServicesSection));
+const ProcessSection = dynamic(() => import("@/components/home/ProcessSection").then((mod) => mod.ProcessSection));
+const ProjectsGrid = dynamic(() => import("@/components/home/ProjectsGrid").then((mod) => mod.ProjectsGrid));
+const ClientsMarquee = dynamic(() => import("@/components/home/ClientsMarquee").then((mod) => mod.ClientsMarquee));
+const ContactSection = dynamic(() => import("@/components/home/ContactSection").then((mod) => mod.ContactSection));
 
 export async function generateMetadata(): Promise<Metadata> {
   const result = await getClient().fetch(homePageQuery, {}, { next: { tags: ["home"] } });

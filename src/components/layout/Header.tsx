@@ -50,7 +50,8 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
 
   const navBaseClass = "fixed top-0 left-0 w-full z-50 px-6 md:px-8 flex justify-between items-center transition-[background-color,padding,box-shadow,backdrop-filter] duration-500 ease-in-out";
   
-  const isTransparent = isMounted && pathname === "/" && !isScrolled;
+  // Removing isMounted to avoid hydration mismatch layout shift / animation on load
+  const isTransparent = pathname === "/" && !isScrolled;
 
   const scrolledClass = isTransparent 
     ? "bg-transparent py-4 md:py-6" 
@@ -69,7 +70,7 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
   return (
     <header className={cn(navBaseClass, scrolledClass)}>
       <div className="flex items-center relative z-[70]">
-        <Link href="/" onClick={() => setMenuOpen(false)}>
+        <Link href="/" onClick={() => setMenuOpen(false)} aria-label={settings?.siteName || 'Vetrina Ana Sayfa'}>
           {settings?.logo ? (
              <div className="relative w-28 h-8 md:w-40 md:h-12 flex items-center">
                 <SanityImage
@@ -106,6 +107,7 @@ export function Header({ settings, navigation }: { settings: any; navigation: an
       <button 
         className="md:hidden relative z-[70] w-10 h-10 flex items-center justify-center"
         onClick={() => setMenuOpen(!menuOpen)}
+        aria-label={menuOpen ? "Menüyü Kapat" : "Menüyü Aç"}
       >
         {menuOpen
           ? <X size={28} className={cn("transition-colors duration-300", "text-primary")} />
