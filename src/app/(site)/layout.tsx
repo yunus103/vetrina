@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import SmoothScroll from "@/components/ui/SmoothScroll";
-import { JsonLd, organizationJsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, furnitureStoreJsonLd } from "@/components/seo/JsonLd";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import Script from "next/script";
@@ -61,7 +61,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             </Link>
           </div>
         )}
-        <JsonLd data={organizationJsonLd(data?.settings)} />
+        <JsonLd data={furnitureStoreJsonLd(data?.settings)} />
         <Header settings={data?.settings} navigation={data?.navigation} />
         <main>{children}</main>
         <Footer settings={data?.settings} navigation={data?.navigation} />
