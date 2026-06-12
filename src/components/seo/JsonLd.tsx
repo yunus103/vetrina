@@ -99,7 +99,7 @@ export function articleJsonLd(post: any) {
         url: `${getSiteUrl()}/favicon.ico`,
       },
     },
-    description: post?.excerpt || post?.seo?.metaDescription,
+    description: post?.seo?.metaDescription || post?.excerpt,
     ...(post?.tags?.length > 0 && { keywords: post.tags.join(', ') }),
   };
 }
