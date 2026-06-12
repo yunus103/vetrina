@@ -161,7 +161,6 @@ export const legalPageBySlugQuery = groq`*[_type == "legalPage" && slug.current 
 export const allSlugsForSitemapQuery = groq`{
   "blogPosts": *[_type == "blogPost" && defined(slug.current)] { "slug": slug.current, _updatedAt },
   "blogCategories": *[_type == "blogCategory" && defined(slug.current)] { "slug": slug.current },
-  "services": *[_type == "service" && defined(slug.current)] { "slug": slug.current, _updatedAt },
   "projects": *[_type == "project" && defined(slug.current)] { "slug": slug.current, _updatedAt },
   "legalPages": *[_type == "legalPage" && defined(slug.current)] { "slug": slug.current, _updatedAt }
 }`;
