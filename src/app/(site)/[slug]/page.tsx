@@ -11,7 +11,7 @@ import { JsonLd, articleJsonLd } from "@/components/seo/JsonLd";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { SidebarContactForm } from "@/components/contact/SidebarContactForm";
+import { SidebarCTA } from "@/components/blog/SidebarCTA";
 import { SidebarProjects } from "@/components/blog/SidebarProjects";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Sağ Kolon: Yapışkan Sidebar */}
           <aside className="lg:col-span-4 space-y-10 lg:sticky lg:top-24 h-fit">
-            <SidebarContactForm />
+            <SidebarCTA />
             <SidebarProjects projects={shuffledProjects} />
           </aside>
         </div>
