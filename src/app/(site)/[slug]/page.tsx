@@ -65,7 +65,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="container mx-auto px-6 md:px-12 pt-32 pb-16 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Sol Kolon: Blog İçeriği */}
-          <article className="lg:col-span-8 max-w-3xl break-words overflow-x-hidden">
+          <article className="lg:col-span-8 max-w-3xl break-words">
             <FadeIn direction="up">
               <Button variant="ghost" className="mb-8 -ml-2 text-primary/60 hover:text-brandRed" render={<Link href="/blog" />}>
                 ← Blog'a Dön
