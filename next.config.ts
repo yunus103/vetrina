@@ -25,6 +25,26 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/ofis-mobilyalari-modoko",
+        destination: "/modoko-ofis-mobilyalari",
+        permanent: true,
+      },
+      {
+        source: "/blog/ofis-mobilyalari-modoko",
+        destination: "/modoko-ofis-mobilyalari",
+        permanent: true,
+      },
+      {
+        source: "/modoko-ofis-mobilyalari-merkezi",
+        destination: "/modoko-ofis-mobilyalari",
+        permanent: true,
+      },
+      {
+        source: "/blog/modoko-ofis-mobilyalari-merkezi",
+        destination: "/modoko-ofis-mobilyalari",
+        permanent: true,
+      },
+      {
         source: "/blog/kategori",
         destination: "/blog",
         permanent: true,
