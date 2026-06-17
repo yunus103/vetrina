@@ -9,7 +9,7 @@ export function SidebarCTA() {
         Ofisinizi Birlikte Tasarlayalım
       </h3>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-        Ücretsiz iç mimari destek ve özel tasarım ofis mobilyaları projelerimiz için bizimle iletişime geçin.
+        Ofisinize en uygun mobilya çözümü için hemen iletişime geçin.
       </p>
       
       <Link 
